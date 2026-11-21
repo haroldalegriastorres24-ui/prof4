@@ -113,6 +113,44 @@ class GestorSoftwareFJ:
             print("    -> Transacción de reserva finalizada.\n")
 
 
+def demostrar_variantes_calculo(servicio):
+    print("\n=== DEMOSTRACIÓN DE VARIANTES DE CÁLCULO ===")
+
+    try:
+        # Variante 1: cálculo con duración y valores predeterminados
+        costo_basico = servicio.calcular_costo(2)
+
+        print(
+            f"1. Cálculo básico (2 unidades): "
+            f"${costo_basico}"
+        )
+
+        # Variante 2: cálculo con impuesto personalizado
+        costo_impuesto = servicio.calcular_costo(2, 0.16)
+
+        print(
+            f"2. Cálculo con impuesto del 16%: "
+            f"${costo_impuesto}"
+        )
+
+        # Variante 3: cálculo con impuesto y descuento
+        costo_descuento = servicio.calcular_costo(
+            2,
+            0.19,
+            20.0
+        )
+
+        print(
+            f"3. Cálculo con impuesto del 19% "
+            f"y descuento de $20: ${costo_descuento}"
+        )
+
+        print("Demostración de variantes completada.\n")
+
+    except ErrorSistemaFJ as e:
+        print(f"[X] Error en la demostración: {e}")
+
+
 def ejecutar_simulacion():
     sistema = GestorSoftwareFJ()
 
@@ -195,6 +233,9 @@ def ejecutar_simulacion():
 
     sistema.registrar_servicio(equipo1)
     sistema.registrar_servicio(asesoria1)
+
+    # Demostración de las variantes de cálculo
+    demostrar_variantes_calculo(sala1)
 
     # Operación 7: Reserva exitosa de sala
     sistema.crear_y_confirmar_reserva(
